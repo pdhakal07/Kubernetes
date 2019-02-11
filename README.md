@@ -18,3 +18,7 @@
   * kubectl is a program that is used to interact with the kubernetes cluster in general and manage what different nodes are doing and what different containers are they running. 
   
 #### Note: When we installed a Docker for Mac or Windows, it was technically creating a virtual machine at the same time. That's essentially, same thing that's happening in the world of kubernetes, the only difference is Docker for Mac or Windows installed the virtual machine for you and all the associated software with it. But in the world of kubernetes not quite so automatic. 
+#### Local Kubernetes Development (step-by-step process)
+  * Install Kubectl -> CLI for interacting with our master
+  * Install a VM driver vitualbox -> Used to make a VM that will be your single node
+  * Install minikube -> Runs a single node on that VM
