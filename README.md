@@ -27,3 +27,8 @@
   * choco install minikube kubernetes-cli -->run as admin in cmd in windows 
   * for installing on  other machine : 
 https://kubernetes.io/docs/tasks/tools/install-minikube/
+  * choco install kubernetes-cli
+  * minikube status
+  * kubectl version
+  * kubectl cluster-info
+#### 
