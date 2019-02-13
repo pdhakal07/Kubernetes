@@ -34,5 +34,9 @@ https://kubernetes.io/docs/tasks/tools/install-minikube/
 #### We can get multi-client image running on our local Kubernetes Cluster running as a container
 #### Docker Compose and Kubernetes
   1. **Docker Compose** -> Each entry can optionally get docker- compose to build an image
-  1. **Kubernetes** -> Kubernetes expects all images to already be built
-  2. **Docker Compose** -> 
+  a. **Kubernetes** -> Kubernetes expects all images to already be built
+  2. **Docker Compose** -> Each entry represents a container we want to create.
+  b. **Kubernetes** -> One config file per object we want to create
+  3. **Docker Compose** -> Each entry defines the networking requirements(ports)
+  c. **Kubernetes** -> We have to manually set up all networking 
+  
