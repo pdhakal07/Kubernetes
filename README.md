@@ -35,8 +35,11 @@ https://kubernetes.io/docs/tasks/tools/install-minikube/
 #### Docker Compose and Kubernetes
   1. **Docker Compose** -> Each entry can optionally get docker- compose to build an image
   a. **Kubernetes** -> Kubernetes expects all images to already be built
+      --> Make sure our image is hosted on docker hub 
   2. **Docker Compose** -> Each entry represents a container we want to create.
   b. **Kubernetes** -> One config file per object we want to create
+     --> Make one config file to create the container
   3. **Docker Compose** -> Each entry defines the networking requirements(ports)
   c. **Kubernetes** -> We have to manually set up all networking 
+     --> Make one config file to set up networking 
   
