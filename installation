@@ -1,0 +1,100 @@
+Minikube Setup on Linux
+These instructions should be valid for Debian / Ubuntu / Mint Linux distributions. Your experience may vary if using an RHEL / Arch / Other distribution or non desktop distro like Ubuntu server, or lightweight distros which may omit many expected tools.
+
+Install VirtualBox:
+Find your Linux distribution and download the .deb package, using a graphical installer here should be sufficient. If you use a package manager like apt to install from your terminal, you will likely get a fairly out of date version.
+
+https://www.virtualbox.org/wiki/Linux_Downloads
+
+After installing, check your installation to make sure it worked:
+
+VBoxManage —version
+
+
+
+As an alternative you can use (or maybe you have to use) KVM instead of VirtualBox. Here are some great instructions that can be found in this post (Thanks to Nick L. for sharing):
+
+https://computingforgeeks.com/install-kvm-centos-rhel-ubuntu-debian-sles-arch/
+
+
+
+Install Kubectl
+In your terminal run the following:
+
+curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+
+chmod +x ./kubectl
+
+sudo mv ./kubectl /usr/local/bin/kubectl
+
+
+
+Check your Installation:
+
+kubectl version
+
+
+
+See also official docs:
+https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-linux
+
+
+
+Install Minikube
+In your terminal run the following:
+
+curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && chmod +x minikube
+
+sudo install minikube /usr/local/bin
+
+
+
+Check your installation:
+
+minikube version
+
+
+
+Start Minikube:
+
+minikube start
+
+
+
+See also official docs:
+
+https://kubernetes.io/docs/tasks/tools/install-minikube/
+===============================================================================
+installing just on master
+ cd /etc/yum.repos.d/
+   91  ls
+   92  sudo vi kube.repo
+[kubernetes]
+name=Kubernetes
+baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+enabled=1
+gpgcheck=0
+
+
+journalctl--- to see logs from kubelet
+yum install -y kubelet kubeadm docker --skip-broken
+swapoff -a
+kubeadm reset
+kubeadm init --ignore-preflight-errors=all
+
+mkdir .kube
+  139  cp /etc/kubernetes/admin.conf .kube/config
+  140  kubectl get namespace
+docker ps
+  143  kubectl get pods -n kube-system
+  144  kubectl get node
+
+to connect master and worker node
+
+kubeadm token list
+
+run below command into worker node:
+kubeadm join 192.168.254.71:6443 --token blabla \
+    --discovery-token-ca-cert-hash sha256:somehastblablabla
+    
+kubectl get node (will show you have now one worker node attached to cluster)
