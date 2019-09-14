@@ -98,3 +98,17 @@ kubeadm join 192.168.254.71:6443 --token blabla \
     --discovery-token-ca-cert-hash sha256:somehastblablabla
     
 kubectl get node (will show you have now one worker node attached to cluster)
+
+
+
+Note: since pods don't connect each other, we need to make them connected
+kubectl get node (giving status not ready).
+We have networking plugins like ovs, flannel and weave. Kubernetes recommends weave.
+
+Run weave net with following command on master
+    $ kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+
+    $ kubectl apply -f https://git.io/weave-kube
+    $ kubectl get pods --all-namespaces
+
+ip a s weave (in all node and master, allocated sdn subnet)
