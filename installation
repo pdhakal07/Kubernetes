@@ -59,6 +59,9 @@ Start Minikube:
 
 minikube start
 
+or 
+minikube start --vm-driver=none
+
 
 
 See also official docs:
