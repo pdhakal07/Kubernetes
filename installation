@@ -78,6 +78,7 @@ baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
 enabled=1
 gpgcheck=0
 
+systemctl status kubelet.service
 
 journalctl--- to see logs from kubelet
 yum install -y kubelet kubeadm docker --skip-broken
