@@ -1,0 +1,64 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mypv
+  labels:
+    type: localpv
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 100Mi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/Users/lokeshkamalay/myindex"
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mypvc
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Mi
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pvcpod
+  labels:
+    app: pvcpod
+spec:
+  volumes:
+    - name: pvc-storage
+      persistentVolumeClaim:
+       claimName: mypvc
+  containers:
+    - name: pvc-container
+      image: nginx
+      ports:
+        - containerPort: 80
+          name: "nginx"
+      volumeMounts:
+        - mountPath: "/usr/share/nginx/html"
+          name: pvc-storage
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pvcsvc
+spec:
+  type: NodePort
+  selector:
+    app: pvcpod
+  ports:
+  - name: http
+    nodePort: 30027
+    port: 80
+    protocol: TCP
